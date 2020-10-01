@@ -1,0 +1,46 @@
+
+CREATE TABLE `student` (`id` int NOT NULL AUTO_INCREMENT,
+ `name` char(25) DEFAULT NULL,  `mobileNo` mediumtext NOT NULL,
+ `gender` varchar(25) DEFAULT NULL,  `dateofBirth` date DEFAULT NULL,
+`caste` varchar(25) DEFAULT NULL,  `age` varchar(25) DEFAULT NULL, 
+ `relegion` varchar(25) DEFAULT NULL,`addressId` int DEFAULT NULL, 
+ PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'
+
+'CREATE TABLE `address` (
+ `id` int NOT NULL AUTO_INCREMENT,
+ `houseNo` char(25) DEFAULT NULL,  `city` varchar(25) DEFAULT NULL,
+  `district` varchar(25) DEFAULT NULL, `state` varchar(25) DEFAULT NULL,
+ `pincode` varchar(25) DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'
+
+[
+   {
+    "name": "Senpai",
+    "mobileNo": "9949256098",
+    "gender": "female",
+    "dateofBirth": "1992-10-12",
+    "caste": "0",
+    "age": "25",
+    "relegion": "Hindhu",
+    "addressId": "1"
+  }
+]
+
+[
+  {
+    "houseNo": "1-5-631/46",
+    "city": "secunderabad",
+    "district": "RangaReddy",
+    "state": "Telangana",
+    "pincode": "500010"
+  }
+]
+
+ALTER TABLE student MODIFY  column studentId INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE student CHANGE id id INT PRIMARY KEY AUTO_INCREMENT;
+ 
+ALTER TABLE student CHANGE mobileNo mobileNo long NOT NULL;
+ALTER TABLE student RENAME COLUMN studentId TO id;
+desc student;
+
+select * from address;
