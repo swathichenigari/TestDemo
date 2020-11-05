@@ -44,3 +44,8 @@ ALTER TABLE student RENAME COLUMN studentId TO id;
 desc student;
 
 select * from address;
+
+git add .
+git commit -m "first commit studentRegistration"
+git branch -M master
+git remote add origin https://github.com/swathichenigari/StudentRegistration.git
