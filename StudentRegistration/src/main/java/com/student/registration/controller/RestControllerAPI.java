@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.student.registration.bo.Address;
 import com.student.registration.bo.Student;
+import com.student.registration.dto.MarksDTO;
+import com.student.registration.dto.StudentDTO;
 import com.student.registration.interfaces.services.AddressService;
 import com.student.registration.interfaces.services.StudentService;
 
@@ -27,6 +30,9 @@ public class RestControllerAPI {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@Autowired
 	private AddressService addressService;
@@ -86,8 +92,27 @@ public class RestControllerAPI {
 	}
 
 	@GetMapping("/getStudent/{id}")
-	public java.util.Optional<Student> getStudentById(@PathVariable int id) {
+	public Student getStudentById(@PathVariable int id) {
 		return studentService.getStudentById(id);
+	}
+	
+	@GetMapping("/getStudentInfo/{id}")
+	public StudentDTO getStudentInfo(@PathVariable int id) {
+		Student student = studentService.getStudentById(id);
+		StudentDTO dto = new StudentDTO();
+		MarksDTO marks = restTemplate.getForObject("http://localhost:8082/marks/std?studentId=" + student.getId(),
+				MarksDTO.class);
+		dto.setMarks(marks);
+		dto.setAddress(student.getAddress());
+		dto.setAge(student.getAge());
+		dto.setCaste(student.getCaste());
+		dto.setDateofBirth(student.getDateofBirth());
+		dto.setGender(student.getGender());
+		dto.setMobileNo(student.getMobileNo());
+		dto.setName(student.getName());
+		dto.setRelegion(student.getRelegion());
+
+		return dto;
 	}
 
 }

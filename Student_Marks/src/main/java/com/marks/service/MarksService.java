@@ -1,6 +1,7 @@
 package com.marks.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,14 @@ public class MarksService {
 
 	public void updateMarks(Marks marksInfo) {
 		marksRepo.save(marksInfo);
+	}
+	
+	public Marks getMarksbyStudentId(int studentId) {
+		return getMarks().stream().filter(mark -> mark.getID()==studentId).findFirst().get();
+	}
+	
+	public Marks getMarksById(int id) {
+		return marksRepo.findById(id).get();
 	}
 	
 }

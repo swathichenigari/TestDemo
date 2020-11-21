@@ -3,6 +3,7 @@ package com.student.registration.dto;
 import java.util.Date;
 
 import com.student.registration.bo.Address;
+import com.student.registration.bo.Subjects;
 
 import lombok.Data;
 
@@ -18,5 +19,6 @@ public class StudentDTO {
 	private int age;
 	private String relegion;
 	private Address address;
+	private MarksDTO marks;
 
 }

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: token-issuer
+Implementation-Version: 1.0.0
+Built-By: srava
+Implementation-Vendor-Id: com.gopinath
+Build-Jdk: 1.8.0_261
+Implementation-URL: https://spring.io/projects/spring-boot/token-issue
+ r
+Created-By: Maven Integration for Eclipse
+

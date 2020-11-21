@@ -41,11 +41,7 @@ public class StudentService {
 		studentRepo.save(studentInfo);
 	}
 	
-	public Optional<Student> getStudentById(int id) {
-		Optional<Student> st = studentRepo.findById(id);
-		if(!st.isPresent()) {
-			throw new NoSuchStudent("Not found");
-		}
-		return st;
+	public Student getStudentById(int id) {
+		return studentRepo.findById(id).get();
 	}
 }

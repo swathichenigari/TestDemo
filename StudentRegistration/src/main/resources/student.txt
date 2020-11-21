@@ -11,9 +11,7 @@ CREATE TABLE `student` (`id` int NOT NULL AUTO_INCREMENT,
  `houseNo` char(25) DEFAULT NULL,  `city` varchar(25) DEFAULT NULL,
   `district` varchar(25) DEFAULT NULL, `state` varchar(25) DEFAULT NULL,
  `pincode` varchar(25) DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'
-
-[
-   {
+{
     "name": "Senpai",
     "mobileNo": "9949256098",
     "gender": "female",
@@ -21,12 +19,7 @@ CREATE TABLE `student` (`id` int NOT NULL AUTO_INCREMENT,
     "caste": "0",
     "age": "25",
     "relegion": "Hindhu",
-    "addressId": "1"
-  }
-]
-
-[
-  {
+    "address": {
     "houseNo": "1-5-631/46",
     "city": "secunderabad",
     "district": "RangaReddy",
@@ -45,7 +38,95 @@ desc student;
 
 select * from address;
 
+
+
+[
+   {
+    "studentId": "1",
+    "semeter": "1",
+    "subjectCode": "CS01",
+    "totalMarks": "0",
+    "marksObtained": "50"
+  }
+]
+
+ALTER TABLE student MODIFY  column studentId INT NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE student CHANGE id id INT PRIMARY KEY AUTO_INCREMENT;
+ 
+ALTER TABLE student CHANGE mobileNo mobileNo long NOT NULL;
+ALTER TABLE student RENAME COLUMN studentId TO id;
+desc student;
+
+select * from address;
+
 git add .
 git commit -m "first commit studentRegistration"
 git branch -M master
 git remote add origin https://github.com/swathichenigari/StudentRegistration.git
+
+
+
+http://localhost:8081/subjects/sub?subjectCode=CS02
+http://localhost:8081/subjects/
+http://localhost:8081/subjects/updateSubjects
+
+{
+    "id":"3",
+    "subjectCode": "CS02",
+    "sub_name": "computer graphics",
+    "branch": "CSE",
+    "semester": "1",
+    "sub_description": "computer graphics",
+    "optional_sub":"Data Mining"
+  }
+  
+  http://localhost:8082/marks/std?studentId=2
+  http://localhost:8082/marks/2
+  http://localhost:8082/marks/updateMarks
+  
+  {
+     "id":"2",
+    "studentId": "3",
+    "semeter": "1",
+    "subjectCode": "CS02",
+    "totalMarks": "100",
+    "marksObtained": "50"
+  }
+  
+  
+  {
+    "id": 0,
+    "name": "Senpai",
+    "mobileNo": 9949256098,
+    "gender": "female",
+    "dateofBirth": "1992-10-12T00:00:00.000+00:00",
+    "caste": "SC",
+    "age": 19,
+    "relegion": "Hindhu",
+    "address": {
+        "aid": 1,
+        "houseNo": "1-5-631/46",
+        "city": "secunderabad",
+        "district": "RangaReddy",
+        "state": "Telangana",
+        "pincode": 500010
+    },
+    "marks": {
+        "studentId": 1,
+        "semeter": 1,
+        "subjectCode": "CS01",
+        "totalMarks": 100,
+        "marksObtained": 50,
+        "subject": {
+            "subjectCode": "CS01",
+            "sub_name": "computer graphics",
+            "sub_description": "computer graphics",
+            "branch": "CSE",
+            "semester": 1,
+            "optional_sub": "Data Mining",
+            "id": 1
+        },
+        "id": 1
+    }
+}

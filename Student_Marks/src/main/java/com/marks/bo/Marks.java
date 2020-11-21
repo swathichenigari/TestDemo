@@ -14,8 +14,8 @@ public class Marks {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ID;
-	private int student_id;
-	private int semeter;
+	private int studentId;
+	private int semester;
 	private String subjectCode;
 	private int totalMarks;
 	private int marksObtained;
