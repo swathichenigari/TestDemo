@@ -130,3 +130,10 @@ http://localhost:8081/subjects/updateSubjects
         "id": 1
     }
 }
+
+ssh -T git@github.com
+git status
+git add . -> for all files to add
+git commit -m "message" 
+git push origin <branch name>
+Question#456
