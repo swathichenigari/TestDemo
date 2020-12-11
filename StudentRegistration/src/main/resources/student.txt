@@ -136,4 +136,5 @@ git status
 git add . -> for all files to add
 git commit -m "message" 
 git push origin <branch name>
+git pull origin <branch name>
 Question#456
