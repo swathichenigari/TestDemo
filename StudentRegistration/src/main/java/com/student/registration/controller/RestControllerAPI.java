@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import com.student.registration.bo.Address;
 import com.student.registration.bo.Student;
 import com.student.registration.dto.MarksDTO;
@@ -96,11 +98,16 @@ public class RestControllerAPI {
 		return studentService.getStudentById(id);
 	}
 	
+	@HystrixCommand(fallbackMethod = "getStudentInfoFallBack")
 	@GetMapping("/getStudentInfo/{id}")
 	public StudentDTO getStudentInfo(@PathVariable int id) {
 		Student student = studentService.getStudentById(id);
+		if(student==null) {
+			System.out.println("studentinfo method");
+			throw new RuntimeException();
+		}
 		StudentDTO dto = new StudentDTO();
-		MarksDTO marks = restTemplate.getForObject("http://localhost:8082/marks/std?studentId=" + student.getId(),
+		MarksDTO marks = restTemplate.getForObject("http://studentmarks/marks/std?studentId=" + student.getId(),
 				MarksDTO.class);
 		dto.setMarks(marks);
 		dto.setAddress(student.getAddress());
@@ -113,6 +120,11 @@ public class RestControllerAPI {
 		dto.setRelegion(student.getRelegion());
 
 		return dto;
+	}
+	
+	public StudentDTO getStudentInfoFallBack(int id) {
+		System.out.println("fallback method");
+		return new StudentDTO();
 	}
 
 }

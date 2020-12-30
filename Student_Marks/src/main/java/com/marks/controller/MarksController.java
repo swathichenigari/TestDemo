@@ -66,7 +66,7 @@ public class MarksController {
 	public MarksDTO getMarksByStudentId(@RequestParam(value = "studentId", defaultValue = "1") int studentId) {
 		Marks mark = marksService.getMarksbyStudentId(studentId);
 		MarksDTO marksDto = new MarksDTO();
-		Subjects subject = restTemplate.getForObject("http://localhost:8081/subjects/sub?subjectCode=" + mark.getSubjectCode(), Subjects.class);
+		Subjects subject = restTemplate.getForObject("http://studentsubjects/subjects/sub?subjectCode=" + mark.getSubjectCode(), Subjects.class);
 		marksDto.setID(mark.getID());
 		marksDto.setMarksObtained(mark.getMarksObtained());
 		marksDto.setSemeter(mark.getSemester());

@@ -1,16 +1,73 @@
+CREATE TABLE `student` (
+  `ID` int NOT NULL AUTO_INCREMENT,  
+  `age` int NOT NULL,
+  `caste` varchar(255) DEFAULT NULL,
+  `dateofBirth` datetime(6) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `mobileNo` bigint NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `relegion` varchar(255) DEFAULT NULL,
+  `address_aid` int NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `FKdwi17jualiaokc9cti5ilffha` FOREIGN KEY (`address_aid`) REFERENCES `address` (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `student` (`id` int NOT NULL AUTO_INCREMENT,
- `name` char(25) DEFAULT NULL,  `mobileNo` mediumtext NOT NULL,
- `gender` varchar(25) DEFAULT NULL,  `dateofBirth` date DEFAULT NULL,
-`caste` varchar(25) DEFAULT NULL,  `age` varchar(25) DEFAULT NULL, 
- `relegion` varchar(25) DEFAULT NULL,`addressId` int DEFAULT NULL, 
- PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'
 
-'CREATE TABLE `address` (
- `id` int NOT NULL AUTO_INCREMENT,
- `houseNo` char(25) DEFAULT NULL,  `city` varchar(25) DEFAULT NULL,
-  `district` varchar(25) DEFAULT NULL, `state` varchar(25) DEFAULT NULL,
- `pincode` varchar(25) DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci'
+CREATE TABLE `marks` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `marksObtained` int NOT NULL,
+  `semester` int NOT NULL,
+  `studentId` int NOT NULL,
+  `subjectCode` varchar(255) DEFAULT NULL,
+  `totalMarks` int NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `address` (
+  `aid` int NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) DEFAULT NULL,
+  `district` varchar(255) DEFAULT NULL,
+  `houseNo` varchar(255) DEFAULT NULL,
+  `pincode` int NOT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`aid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+URL's using Zuul API Gateway
+for Student:
+http://localhost:8003/studentregistration/api/getStudentInfo/2
+http://localhost:8003/studentregistration/api/students
+
+for marks:
+http://localhost:8003/studentmarks/marks/
+http://localhost:8003/studentmarks/marks/std?studentId=2
+
+for subjects:
+http://localhost:8003/studentsubjects/subjects/
+http://localhost:8003/studentsubjects/subjects/1
+
+CREATE TABLE `subjects` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `branch` varchar(255) DEFAULT NULL,
+  `optional_sub` varchar(255) DEFAULT NULL,
+  `semester` int NOT NULL,
+  `sub_description` varchar(255) DEFAULT NULL,
+  `sub_name` varchar(255) DEFAULT NULL,
+  `subjectCode` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UK_s3hukulncyfmjphaqpycb7ti2` (`subjectCode`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `active` bit(1) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `roles` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 {
     "name": "Senpai",
     "mobileNo": "9949256098",
@@ -137,4 +194,5 @@ git add . -> for all files to add
 git commit -m "message" 
 git push origin <branch name>
 git pull origin <branch name>
+git branch -d <branch> -> delete branch
 Question#456
