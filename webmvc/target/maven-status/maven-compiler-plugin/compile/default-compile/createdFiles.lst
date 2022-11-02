@@ -1,0 +1,5 @@
+com\mvc\HelloController.class
+com\mvc\MySecurityConfig.class
+com\mvc\MyConfig.class
+com\mvc\WebInitializer.class
+com\mvc\SecurityInitializer.class
