@@ -1,5 +1,7 @@
 package com.order.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,11 @@ public class OrderServiceImpl implements OrderService{
 	public void createOrder(Order order) {
 		orderRepository.save(order);
 		
+	}
+
+	@Override
+	public List<Order> getOrders() {
+		return orderRepository.findAll();
 	}
 
 }

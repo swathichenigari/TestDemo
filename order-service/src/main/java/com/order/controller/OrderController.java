@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.template.TemplateAvailabilityProvider;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,8 +52,8 @@ public class OrderController {
 	@PostMapping("/createOrder/{customerId}")
 	public void createOrderForCustomer(@PathVariable int customerId) {
 
-		Address customerAddress = template.getForObject("http://localhost:8081/address/2", Address.class);
-		ResponseEntity<Product[]> productList = template.getForEntity("http://localhost:8083/products", Product[].class);
+		Address customerAddress = template.getForObject("http://customer-server/address/2", Address.class);
+		ResponseEntity<Product[]> productList = template.getForEntity("http://product-server/products", Product[].class);
 		List<Product> products = Arrays.asList(productList.getBody());
 		
 		
@@ -79,5 +80,18 @@ public class OrderController {
 		orderService.createOrder(order);
 		
 	}
+	
+	@GetMapping("/orders")
+	public List<Order> getOrders(){
+		return orderService.getOrders();
+	}
+	
+	@GetMapping("/orders/prodcuts")
+	public List<Product> getProductsInsideOrder(){
+		ResponseEntity<Product[]> productList = template.getForEntity("http://product-server/products", Product[].class);
+		List<Product> products = Arrays.asList(productList.getBody());
+		return products;
+	}
+
 
 }
