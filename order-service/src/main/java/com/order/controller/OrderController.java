@@ -38,6 +38,9 @@ public class OrderController {
 	private RestTemplate template;
 	
 	@Autowired
+	ProductClient productClient;
+	
+	@Autowired
 	private OrderStatusRepository orderStatusRepository;
 	
 	
@@ -91,6 +94,12 @@ public class OrderController {
 		ResponseEntity<Product[]> productList = template.getForEntity("http://product-server/products", Product[].class);
 		List<Product> products = Arrays.asList(productList.getBody());
 		return products;
+	}
+	
+	@GetMapping("/orders/prodcuts-feign")
+	public ResponseEntity<List<Product>> getProductsFeign(){
+		System.out.println("using feign clinet");
+		return productClient.getAllProducts();
 	}
 
 
